@@ -1,39 +1,13 @@
-<html>
-    <head>
-        <title>Django blog James</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="/">Django blog James</a></h1>
-        </div>
-        
-        
-            {% for post in posts %}
-    <div>
-        <h2><a href="">{{ post.title }}</a></h2>
-        <p>{{ post.text|linebreaksbr }}</p>
-        <p> creado: {{ post.created_date }}</p>
-        <p> publicado: {{ post.published_date }}</p>
-        
-    </div>
-{% endfor %}
+{% extends 'blog/base.html' %}
 
-        <div>
-            <p>published: 30.05.2020, 13:50 </p>
-            <h2><a href="">SE UN GANADOR</a></h2>
-            <p>"LOS QUE ABANDONAN NUNCA GANAN Y UN GANADOR NUNCA ABANDONA"</p>
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
         </div>
-
-        <div>
-            <p>published: 30.05.2020, 13:50</p>
-            <h2><a href="">NUNCA TE RINDAS</a></h2>
-            <p>"DIGALE AL MUNDO LO QUE INTENTA HACER, PERO LLEVELO ACABO ANTES DE DECIRLO"</p>
-        </div>
-
-        <div>
-            <p>published: 30.05.2020, 13:50</p>
-            <h2><a href="">FELIZ DIA</a></h2>
-            <p>"TE DESEO UN FELIZ DIA ANTICIPADO AMOR"</p>
-        </div>
-    </body>
-</html>
+    {% endfor %}
+{% endblock %}
